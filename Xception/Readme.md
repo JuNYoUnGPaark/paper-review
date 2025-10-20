@@ -22,18 +22,21 @@
 - Figure로 Main idea 확인
     - 기존 Inception V3를 단순화하면 다음과 같이 그릴 수 있다.
         
-        ![image.png](attachment:d006d1bb-cd91-43a3-9d78-7845ed029acc:image.png)
+        <img width="457" height="281" alt="image" src="https://github.com/user-attachments/assets/b0b6686c-f829-4a30-839e-e31b7cd88f5f" />
+
         
     - 이 1X1 Conv들을 한번에 묶어서 다시 그리면 다음과 같다.
         - 3~4개의 segments로 나뉘던 일반 Conv라서 segment 내부에서 채널이 다시 섞인다. → ‘완전 분리가 아니다’
         
-        ![image.png](attachment:113d3c8d-1436-4211-af1a-ced45bf1f479:image.png)
+        <img width="523" height="289" alt="image" src="https://github.com/user-attachments/assets/46ff8e67-e35b-4447-8c24-00b96eac539e" />
+
         
     - 이제 채널 수만큼 3X3을 통과하면 각각의 채널 내에서만 공간을 섞기 때문에 ‘완전한 분리’가 된다.
         
         (단, 실제 Xception은 순서가 다르고 차이점이 있긴 하다. 단지 Inception을 극대화한 것의 표현임)  
         
-        ![image.png](attachment:c684c118-2a64-41cf-93ea-388cf736ad12:image.png)
+        <img width="505" height="275" alt="image" src="https://github.com/user-attachments/assets/0fa2fd2e-1278-4dd5-a2e0-dc1bf185e00b" />
+
         
 
 ## 2. Why Depthwise separable?
@@ -68,24 +71,30 @@
 - Middle flow는 8번 반복
 - 총 36 conv layers
 
-![image.png](attachment:4117ec98-573c-46fa-b7cd-898ca9722f50:image.png)
+<img width="1083" height="739" alt="image" src="https://github.com/user-attachments/assets/c9110311-dad7-46b6-a85c-9077702a93e5" />
+
 
 - `SeparableConv 728, 3X3`: Depthwise 3X3 → BN → Pointwise 1X1(=출력 728) → BN (ReLU가 없다)
 - Entry flow 초반 두 층은 일반 Conv Layer
     
-    ![image.png](attachment:9fc0d3b4-26f0-408f-b595-bb9e15d3bdea:image.png)
+    <img width="525" height="450" alt="image" src="https://github.com/user-attachments/assets/f24654af-f822-4a1e-b0b9-42b63be45524" />
+
     
 - ReLU는 블록 전/후에 따로 들어가 있다.
 - 처음과 마지막 블록을 제외한 모든 block에서 skip-connection을 사용
     
-    ![image.png](attachment:2bb9da92-d726-41cd-878b-af04a13a2677:image.png)
+    <img width="523" height="419" alt="image" src="https://github.com/user-attachments/assets/5200b3e3-6542-4154-b95d-32afc4a04db9" />
+
     
 - 마지막은 GAP
 
 ## 4. Evaluation
 
-![image.png](attachment:b698eb70-574c-4713-8e69-2311a60339bc:image.png)
+<img width="492" height="149" alt="image" src="https://github.com/user-attachments/assets/c5b189a0-2bc5-485b-af7e-147acfcff288" />
 
-![image.png](attachment:b428bc0c-5f6a-43e2-ab13-8f46a1596ef3:image.png)
+
+<img width="505" height="410" alt="image" src="https://github.com/user-attachments/assets/aa317fa3-2460-4691-af47-f5c4bbdca244" />
+
+
 
 - 기존 Inception 모델 대비 단순하고 효율적이면서도 정확도 향상
