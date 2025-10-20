@@ -72,4 +72,5 @@ $$
 
 ![image.png](attachment:d75fd895-0f8d-42f5-a2f7-bfbcf62091c8:image.png)
 
+
 - Train과 Validation 과정에서도 기본 → SE 적용 → CBAM 적용 순으로 error가 감소했다.
