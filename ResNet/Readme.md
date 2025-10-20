@@ -16,7 +16,8 @@
     
 - 하지만, 오히려 training error가 커지는 것을 보아 모델이 identity mapping을 만들기 어려워한다는 것을 발견.
     
-    ![image.png](attachment:3e2cea07-e8d3-4cc3-9d9d-654753a09cb9:image.png)
+    <img width="757" height="381" alt="image" src="https://github.com/user-attachments/assets/b20b144c-7e14-446a-ada6-5f24325fc6d2" />
+
     
     → 그래서 등장한게 ‘**skip-connection(shortcut connection)**’인 것.
     
@@ -29,7 +30,8 @@
 
 ## 2. skip-connection
 
-![image.png](attachment:aabdda4d-637c-48a2-a1ad-9e3898e242ac:image.png)
+<img width="757" height="381" alt="image" src="https://github.com/user-attachments/assets/100ecc30-b62d-49f6-94b9-5b80d299fc80" />
+
 
 - 입력값 $x$가 들어와서 $F(x)$가 나가는 것이 기본. 여기서, $x \ +\ F(x)$가 나가도록 layer를 연결하는 것이 skip-connection이다.
 - 효과가 있는 이유
@@ -42,7 +44,8 @@
 
 ## 3. Model Structure
 
-![image.png](attachment:9b066278-f900-4356-9b77-6e4dff3a3829:image.png)
+<img width="1264" height="370" alt="image" src="https://github.com/user-attachments/assets/8f09322b-eb34-47c3-8e1f-ab0f92dd9db6" />
+
 
 - Conv 이후엔 ReLU는 작성 생략
 - BN을 한다면) Input → Conv → BN → ReLU → Conv → BN → **+ Input** → ReLU 순으로 진행
@@ -51,12 +54,14 @@
 - 실선: identity shortcut (***in_channel = out_channel이여야 가능***)
 - 마지막엔 GAP를 적용
 
-![image.png](attachment:bcb92d3a-2616-4e33-9fb2-6dcc335abc2b:image.png)
+<img width="621" height="233" alt="image" src="https://github.com/user-attachments/assets/2b87b426-64e7-4daa-ad46-355896647c14" />
+
 
 - 50층 이상의 ResNet부터는 **Bottleneck** 구조를 사용하여 params. FLOPs 감소
 - 1X1으로 channel 수를 조절하면서 3X3로 공간 정보를 학습
 
-![image.png](attachment:db66d649-a7cf-46bf-bdde-94acc147265e:image.png)
+<img width="817" height="354" alt="image" src="https://github.com/user-attachments/assets/cf8f3081-fef4-4bd8-bd01-6e1f721659fa" />
+
 
 - 34-layer 모델까진 conv_x의 첫 번째 layer에서 stride=2를 적용하고 50-layer 모델 부턴 conv_x의 두 번째 layer에서 stride=2를 적용
 
@@ -91,17 +96,20 @@
 
 ## 4. evaluation
 
-![image.png](attachment:88f3006e-63b5-47b3-b736-0bc395a5ca31:image.png)
+<img width="851" height="472" alt="image" src="https://github.com/user-attachments/assets/e65131a9-dc3d-47bb-a783-03aa913872d3" />
+
 
 - 깊을수록 std가 더 작다는 것을 알 수 있다. 더 안정적이다.
 - plain한 모델들은 기존의 문제인 깊을수록 불안정하다. (std가 크다)
 
-![image.png](attachment:fd1a60ed-5332-484f-a0b8-858d09d6a90c:image.png)
+<img width="937" height="308" alt="image" src="https://github.com/user-attachments/assets/6e73e397-82d0-46a0-b91a-4e828e81a248" />
+
 
 - 위 실험 결과도 마찬가지로 기존의 모델들은 깊을수록 error가 높지만 skip-connection을 적용한 모델들은 깊은수록 오히려 성능이 좋아진다.
 - 좋아지지는 않더라도 비슷, 동일하기만 해도 상당한 발견이지만 오히려 성능 향상에 기여하는 skip-connection은 이후에 나온 수많은 모델들의 필수 사항이 되었다.
 
-![image.png](attachment:dfe40590-0817-4cec-b81a-277c684d437d:image.png)
+<img width="627" height="305" alt="image" src="https://github.com/user-attachments/assets/84138f15-bbd3-47f3-9359-39f12d4318f1" />
+
 
 - 6개의 모델을 앙상블하여 이미지 분류에서 1등 달성.
 
@@ -116,5 +124,6 @@
 - GPT:
 
 **ResNet은 “스테이지별 동일 블록 반복”으로 단순함·안정성·효율을 얻는 설계에**요.
+
 
 Basic(2개)과 Bottleneck(3개)은 **expansion·스케일링 철학이 달라** 한 모델 안에서 섞으면 규칙이 깨지고 이득도 크지 않아서, **아예 모델 패밀리 차원에서 분리** (18/34 vs 50/101/152)하는 게 표준입니다.
