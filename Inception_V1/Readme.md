@@ -20,7 +20,8 @@ https://arxiv.org/pdf/1409.4842
 
 - Inception module: 다양한 kernel_size를 사용하여 결과를 concat
     
-    ![image.png](attachment:f45936ad-7fad-4779-bb1a-093a49ebd7ed:image.png)
+    <img width="633" height="289" alt="image" src="https://github.com/user-attachments/assets/3f6a6cd7-9784-4a8e-8759-38fb65f9a5e0" />
+
     
     - VGGNet은 3X3 filter를 두 번 통과하여 5X5 filter와 같은 receptive filed를 얻었지만, 해당 모델에서는 3가지를 모두 사용하여 얻은 feature map을 depth축으로 concat하는 방식을 채택한 것.
         
@@ -28,8 +29,8 @@ https://arxiv.org/pdf/1409.4842
         
 - **Inception Module with dimension reductions**
     
-    ![image.png](attachment:710b8f4d-bda0-4cf8-b816-85afad8ed42d:image.png)
-    
+    <img width="602" height="309" alt="image" src="https://github.com/user-attachments/assets/f1892b0e-430d-4c70-b887-fec7d5541a6b" />
+
     - **1X1 conv filter가 하는 역할과 의미**
         1. BottleNeck 구조를 만들어 필요한 parameter 수 감소 → 차원 축소 
             
@@ -71,15 +72,18 @@ https://arxiv.org/pdf/1409.4842
 
 ## 2. GoogLeNet Structure
 
-![image.png](attachment:9791e447-fc9b-4543-8fdb-dcccefa57847:image.png)
+<img width="1179" height="687" alt="image" src="https://github.com/user-attachments/assets/64a56bac-edf3-4a82-bb8b-bb86d1f09f7e" />
+
 
 - 위에서 설명한 Inception Module이 뒤쪽 Layer까지 반복적으로 이어져있는 구조로 이루어져 있다.
 
-![image.png](attachment:b55bdbce-43f4-47fd-9a30-634d558119be:image.png)
+<img width="1276" height="283" alt="image" src="https://github.com/user-attachments/assets/ddd0049d-b494-407b-a83e-db0fa85a8ab5" />
+
 
 - One Inception Module
 
-![image.png](attachment:144cdda5-7355-41f5-b8a5-e6906ea5c035:image.png)
+<img width="725" height="1116" alt="image" src="https://github.com/user-attachments/assets/c5598425-ad54-4b56-974d-d8e897fccf67" />
+
 
 - (S)와 (V) 해석 방법
     
@@ -89,12 +93,14 @@ https://arxiv.org/pdf/1409.4842
     
     Input_shape=(8, 8)일 때 Size를 유지하기 위해서 필요한 각각의 padding
     
-    ![image.png](attachment:3bf57780-ed3f-418e-919e-7005a606a13d:image.png)
+    <img width="1897" height="1000" alt="image" src="https://github.com/user-attachments/assets/981eca66-1a3d-4a0d-9190-d685f8349d53" />
+
     
 
 - **Auxiliary Classifiers**
 
-![image.png](attachment:5278f3c4-8294-4f58-86d2-3e7d8a217941:image.png)
+<img width="242" height="571" alt="image" src="https://github.com/user-attachments/assets/d0d22815-3eca-418a-9a29-8e8b1699e131" />
+
 
 - Inception(4a), (4d) output에 붙는다.
 - Gradient Vanishing을 방지하기 위한 모듈
@@ -109,13 +115,14 @@ $$
 
 ## 3. Results
 
-![image.png](attachment:e4b695d3-ce70-4af0-9153-510620e24573:image.png)
+<img width="613" height="193" alt="image" src="https://github.com/user-attachments/assets/70ccf27c-7721-4fe9-a17e-08513d8aa30b" />
+
 
 - 7개 모델을 (앞서 제시된 6개 + 더 큰 모델 1개) 앙상블
 - 6개 모델은 구조부터 초기 웨이트까지 같고 data보는 순서만 다르게
 - IMG 1장당 144장으로 augmentation하고 총 1008개 output에 대한 평균 계산하여 최종 분류 수행 (144 images * 7 models = 1008 outputs)
     
-    ![image.png](attachment:04efdfbb-4eef-4f0b-90fc-3d740d440411:image.png)
+    <img width="1352" height="999" alt="image" src="https://github.com/user-attachments/assets/1a68c629-4efd-409e-938d-5eb2425999c3" />
     
 
 ## 4. Points of Confusion
@@ -140,4 +147,5 @@ $$
     “거대한 FC=공간축까지 연결” ⇒ “작은 FC=채널만 연결” 
     
 - 분류 전 최종 feature map에 대한 **요약 기능**을 한다. ㄴ
+
 - input size가 달라도 사용이 가능해져 **이식성**이 좋아진다.
