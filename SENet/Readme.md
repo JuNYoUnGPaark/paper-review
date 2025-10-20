@@ -19,7 +19,8 @@
     3. 연산/자원 비용의 감소와 동시에 모델의 성능 향상
 - Main Structure
     
-    ![image.png](attachment:6463ad6b-715d-4aab-b40c-d17f6d586951:image.png)
+    <img width="1122" height="228" alt="image" src="https://github.com/user-attachments/assets/6442ea2f-3c0f-4463-828f-46a8f27c9b46" />
+
     
     $X = Input\ data ,\ (H', W', C') = Input\ shape, \ F_{tr} = module\ of\ the\ model \\
     
@@ -76,16 +77,19 @@
         s = \sigma\!\big(W_2\,\mathrm{ReLU}(W_1 z)\big),\qquad\tilde{u}_c = s_c \cdot u_c
         $$
         
-        ![image.png](attachment:657c66e9-f93b-4053-b132-b9024218fa8c:image.png)
+        <img width="862" height="367" alt="image" src="https://github.com/user-attachments/assets/606b3db4-1417-4201-8e94-14b80737a5bf" />
+
         
     - 위의 Main Structure에서 알 수 있듯이 모델의 한 모듈이 끝날 때마다 SE-block이 삽입되어 있다.
     - Channel 수를 보면 256 → 16 → 256, 512 → 32 → 512,… 등 *Bottleneck 구조*를 확인할 수 있고 X16의 비율로 증감한다. 해당 수치는 *Reduction ratio*라는 hyperparmeter로 실험 결과는 아래와 같다.
         
-        ![image.png](attachment:510e6cb0-0578-4980-8325-5ce78bb4f551:image.png)
+        <img width="362" height="146" alt="image" src="https://github.com/user-attachments/assets/0d24863f-7a53-40a8-8768-8e3ebf5d6a24" />
+
         
     - Exciation은 Layer의 깊이에 따라 하는 역할이 다르다.
         
-        ![image.png](attachment:cd25a2eb-0dd7-4ef8-9821-6561f7fd4c9e:image.png)
+        <img width="1081" height="571" alt="image" src="https://github.com/user-attachments/assets/11e602c7-5650-4d20-a07c-b0b9f1411ef7" />
+
         
 - 결국, $z$는 입력별 요약이고 $s$도 입력 조건화된 가중치이므로 채널 축으로 self-attention한 것으로도 볼 수 있다.
 
@@ -124,4 +128,5 @@
 ### 7. SE는 일종의 증폭기 역할을 하는데 불균형 데이터에서 일반화 성능이 더 약해질 수 있지 않을까?
 
 - SE는 입력별로 Channel 중요도를 재가중하는 모듈일 뿐, 데이터 분포의 근본 문제를 해결하거나 본질적으로 악화시키는 구조가 아니다.
+
 - 위의 6.의 기준점에 대한 개념을 이해하면 혼동되지 않을 것.
